@@ -19,13 +19,14 @@ Depends on all your plugins, and provides a function to register them.
   s.static_framework    = true
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.dependency 'Flutter'
-  s.dependency 'audioplayers'
+  s.dependency 'audio_session'
   s.dependency 'connectivity'
   s.dependency 'device_info'
   s.dependency 'firebase_core'
   s.dependency 'firebase_remote_config'
   s.dependency 'flutter_native_timezone'
   s.dependency 'flutter_secure_storage'
+  s.dependency 'just_audio'
   s.dependency 'path_provider'
   s.dependency 'shared_preferences_ios'
   s.dependency 'sqflite'

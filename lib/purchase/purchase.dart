@@ -9,7 +9,8 @@ class Purchase {
 
   static _init(User user) async {
     await Purchases.setDebugLogsEnabled(true);
-    await Purchases.setup("WlJootocHHqyGFejIybfgWAGuCYmYyCR", appUserId: user.email);
+    await Purchases.setup("WlJootocHHqyGFejIybfgWAGuCYmYyCR",
+        appUserId: user.email);
     AnalyticService.getInstance().getFBAnonymousId().then((fbAnonymousId) {
       Purchases.setFBAnonymousID(fbAnonymousId);
     });
@@ -28,7 +29,7 @@ class Purchase {
       _completer = Completer<Purchase>();
       try {
         await _init(user);
-        _completer.complete(Purchase._());
+        //_completer.complete(Purchase._());
       } on Exception catch (e) {
         print(e);
         _completer.completeError(e);
@@ -52,11 +53,13 @@ class Purchase {
     return Purchases.purchaseProduct(productIdentifier);
   }
 
-  void addPurchaserInfoUpdateListener(PurchaserInfoUpdateListener purchaserInfoUpdateListener) {
+  void addPurchaserInfoUpdateListener(
+      PurchaserInfoUpdateListener purchaserInfoUpdateListener) {
     Purchases.addPurchaserInfoUpdateListener(purchaserInfoUpdateListener);
   }
 
-  void removePurchaserInfoUpdateListener(PurchaserInfoUpdateListener listenerToRemove) {
+  void removePurchaserInfoUpdateListener(
+      PurchaserInfoUpdateListener listenerToRemove) {
     Purchases.removePurchaserInfoUpdateListener(listenerToRemove);
   }
 }

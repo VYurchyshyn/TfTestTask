@@ -63,7 +63,7 @@ PODS:
     - Firebase/Messaging (= 8.9.0)
     - firebase_core
     - Flutter
-  - firebase_remote_config (2.0.4):
+  - firebase_remote_config (2.0.5):
     - Firebase/RemoteConfig (= 8.9.0)
     - firebase_core
     - Flutter
@@ -209,13 +209,13 @@ PODS:
   - PurchasesHybridCommon (1.11.2):
     - Purchases (= 3.13.2)
   - Reachability (3.2)
-  - Sentry (7.10.2):
-    - Sentry/Core (= 7.10.2)
-  - Sentry/Core (7.10.2)
+  - Sentry (7.11.0):
+    - Sentry/Core (= 7.11.0)
+  - Sentry/Core (7.11.0)
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
-    - Sentry (~> 7.10.1)
+    - Sentry (~> 7.11.0)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - sign_in_with_apple (0.0.1):
@@ -393,7 +393,7 @@ SPEC CHECKSUMS:
   firebase_analytics: 804e3cd287be1dad609e8d29e039735d0d1c36be
   firebase_core: f770e033e790657b3505f04be4cb24c482912f11
   firebase_messaging: 67e04bcde36f0d8a86b280aef4534bd7f1a6b7ef
-  firebase_remote_config: e9db5b3163748098bc53fdb9f13ce99adc405b65
+  firebase_remote_config: fe535c5c4706e138eece94f79c12130a99201c8e
   FirebaseABTesting: aaa0e096c9fc9972ce6806d596e8fcc077d4371f
   FirebaseAnalytics: 4ab446ce08a3fe52e8a4303dd997cf26276bf968
   FirebaseCore: 599ee609343eaf4941bd188f85e3aa077ffe325b
@@ -426,8 +426,8 @@ SPEC CHECKSUMS:
   PurchasesCoreSwift: 2ea4b33e5cece5c8a0751594ef7c6cbfcbd747a9
   PurchasesHybridCommon: 56ef42d85c3e930d49aff4ac5fa027373d2e1bb8
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Sentry: 7bf9bfe713692cf87812e55f0999260494ba7982
-  sentry_flutter: 77ccdac346608b8ce7e428e7284e7a3e4e7f4a02
+  Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
+  sentry_flutter: efb3df2c203cd03aad255892a8d628a458656d14
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sign_in_with_apple: 34f3f5456a45fd7ac5fb42905e2ad31dae061b4a
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
@@ -439,4 +439,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ab6e7114f987773e955e1ff4a52b769623d38ced
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

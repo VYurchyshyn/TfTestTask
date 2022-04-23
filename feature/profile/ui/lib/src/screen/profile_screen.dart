@@ -1,13 +1,18 @@
 import 'package:core/core.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:profile_data/data.dart';
+import 'package:profile_ui/src/model/body_mind_spirit_statistic.dart';
 import 'package:profile_ui/src/screen/profile_cubit.dart';
 import 'package:profile_ui/src/screen/profile_state.dart';
+import 'package:profile_ui/src/screen/widgets/health_balance_widget.dart';
 import 'package:profile_ui/src/screen/widgets/profile_header_widget.dart';
 import 'package:profile_ui/src/screen/screen_item/header_item.dart';
 import 'package:profile_ui/src/screen/screen_item/test_button_item.dart';
 import 'package:ui_kit/ui_kit.dart';
+import '../screen/screen_item/health_balance_item.dart';
 
 class ProfileScreen extends BasePage<ProfileState, ProfileCubit> {
   static final _StateToListMapper _listMapper = _StateToListMapper();
@@ -26,10 +31,11 @@ class ProfileScreen extends BasePage<ProfileState, ProfileCubit> {
   @override
   Widget buildPage(
       BuildContext context, ProfileCubit bloc, ProfileState state) {
-    return _buildContent(user.firstName, bloc, context);
+    return _buildContent(user.firstName, bloc, context, state);
   }
 
-  Widget _buildContent(String name, ProfileCubit bloc, BuildContext context) =>
+  Widget _buildContent(String name, ProfileCubit bloc, BuildContext context,
+          ProfileState state) =>
       Scaffold(
         appBar: SimpleAppBar(
           leadingType: LeadingType.settings,
@@ -41,10 +47,12 @@ class ProfileScreen extends BasePage<ProfileState, ProfileCubit> {
         ),
         backgroundColor: AppColorScheme.colorBlack,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.light, child: _buildItemList(bloc)),
+          value: SystemUiOverlayStyle.light,
+          child: _buildItemList(bloc, state.bodyMindSpiritStatistic),
+        ),
       );
 
-  Widget _buildItemList(ProfileCubit bloc) {
+  Widget _buildItemList(ProfileCubit bloc, BodyMindSpiritStatistic statistic) {
     return Stack(
       children: [
         ListView.builder(
@@ -58,14 +66,56 @@ class ProfileScreen extends BasePage<ProfileState, ProfileCubit> {
                   navigateToEditProfile: () {},
                   navigateToSettings: () {});
             }
+            if (item is HealthBalanceItem) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Health Balance',
+                          style: title30,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Last week',
+                              style: textRegular16,
+                            ),
+                            SizedBox(width: 6),
+                            Icon(
+                              CupertinoIcons.arrow_right_arrow_left,
+                              color: AppColorScheme.colorPrimaryWhite,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    HealthBalanceWidget(
+                      body: statistic.body,
+                      mind: statistic.mind,
+                      spirit: statistic.spirit,
+                    ),
+                  ],
+                ),
+              );
+            }
             if (item is TestButtonItem) {
-              return ElevatedButton(
-                  onPressed: () {
-                    bloc.getBodyMindSpiritStatistic(5);
-                  },
-                  child: Text(
-                    'Fetch BodyMindSpiritStatistic',
-                  ));
+              return Padding(
+                padding: EdgeInsets.only(top: 60.0, left: 16, right: 16),
+                child: ElevatedButton(
+                    onPressed: () {
+                      bloc.getBodyMindSpiritStatistic(5);
+                    },
+                    child: Text(
+                      'Fetch BodyMindSpiritStatistic',
+                      style: TextStyle(color: Colors.black),
+                    )),
+              );
             }
 
             return SizedBox.shrink();
@@ -82,7 +132,8 @@ class _StateToListMapper {
   _StateToListMapper() {
     _itemOrder = {
       0: HeaderItem,
-      1: TestButtonItem,
+      1: HealthBalanceItem,
+      2: TestButtonItem,
     };
   }
 
@@ -91,6 +142,8 @@ class _StateToListMapper {
     switch (itemType) {
       case HeaderItem:
         return state.headerItem;
+      case HealthBalanceItem:
+        return state.healthBalanceItem;
       case TestButtonItem:
         return state.testButtonItem;
     }
